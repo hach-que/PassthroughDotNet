@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Passthrough/Passthrough.csproj" />
+  <Project Path="PassthroughAppEx/PassthroughAppEx.csproj" />
+</Solution>

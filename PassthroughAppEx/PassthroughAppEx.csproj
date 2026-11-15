@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net10.0-macos</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>true</ImplicitUsings>
+		<OutputType>Library</OutputType>
+		<IsAppExtension>true</IsAppExtension>
+	</PropertyGroup>
+
+	<Target Name="BuildSwiftFSExtensionEntryPoint" BeforeTargets="_ComputeLinkNativeExecutableInputs">
+		<PropertyGroup>
+			<DeviceSpecificIntermediateOutputPath Condition="'$(DeviceSpecificIntermediateOutputPath)' == ''">/tmp/</DeviceSpecificIntermediateOutputPath>
+			<SwiftOutputFile>$(DeviceSpecificIntermediateOutputPath)/PassthroughAppEx.o</SwiftOutputFile>
+		</PropertyGroup>
+
+		<Exec Command="swiftc -module-name 'PassthroughAppEx' '$(MSBuildThisFileDirectory)PassthroughAppEx.swift' -sdk '$(_SdkRoot)' -target '$(TargetArchitectures.ToLower())-apple-macos$(SupportedOSPlatformVersion)' -application-extension -swift-version 5 -parse-as-library -c -import-objc-header '$(MSBuildThisFileDirectory)PassthroughFileSystem.h' -o '$(SwiftOutputFile)'" />
+
+		<ItemGroup>
+			<_NativeExecutableObjectFiles Include="$(SwiftOutputFile)" />
+		</ItemGroup>
+	</Target>
+</Project>
