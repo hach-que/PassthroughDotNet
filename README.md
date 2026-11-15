@@ -2,8 +2,8 @@
 
 1. Change the code signing key in `CodeSigning.Build.props` to match your development key. FSKit extensions can't be ad-hoc signed and `mount` will fail with `errorDomain error 2` if the filesystem extension binary isn't signed properly.
 2. Update the application IDs in the projects so that:
-  - The PassthroughAppEx uses an identifier you can register in the App Developer Portal and ends with `.AppEx`
-  - The Passthrough project uses the same identifier but without the `.AppEx`. You don't need to create a provisioning profile/identifier in the portal for the main app; only the FSKit extension.
+    - The PassthroughAppEx uses an identifier you can register in the App Developer Portal and ends with `.AppEx`
+    - The Passthrough project uses the same identifier but without the `.AppEx`. You don't need to create a provisioning profile/identifier in the portal for the main app; only the FSKit extension.
 3. Go to the Apple Developer portal, and register the identifier you set for PassthroughAppEx with the FSKit Module entitlement enabled.
 4. Create a provisioning profile in the developer portal for that new identifier, set the certificates/test devices appropriately, and then save the provisioning profile with a name like "Passthrough .NET FSKit Module".
 5. In Xcode -> Settings -> Apple Accounts -> (your account) -> (your account under your team), click "Download Manual Profiles". This will sync the new provisioning profile to your Mac.
