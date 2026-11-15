@@ -4,8 +4,6 @@
 <dict>
 	<key>CFBundleName</key>
 	<string>Passthrough</string>
-	<key>CFBundleIdentifier</key>
-	<string>games.redpoint.Passthrough</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>

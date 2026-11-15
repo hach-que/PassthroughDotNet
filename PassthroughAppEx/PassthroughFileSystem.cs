@@ -3,6 +3,7 @@
 using FSKit;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace PassthroughAppEx
@@ -45,7 +46,7 @@ namespace PassthroughAppEx
             try
             {
                 this.ContainerStatus = FSContainerStatus.Ready;
-                replyHandler(new PassthroughFSVolume(urlResource.Url.Path), null);
+                replyHandler(new PassthroughFSVolume(urlResource.Url.Path!), null);
             }
             catch
             {

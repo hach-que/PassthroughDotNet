@@ -5,7 +5,10 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>true</ImplicitUsings>
 		<SupportedOSPlatformVersion>26.0</SupportedOSPlatformVersion>
+		<ApplicationId>TZ6CB8526X.games.redpoint.Passthrough</ApplicationId>
 	</PropertyGroup>
+
+	<Import Project="$(MSBuildThisFileDirectory)../CodeSigning.Build.props" />
 
 	<ItemGroup>
 		<ProjectReference Include="..\PassthroughAppEx\PassthroughAppEx.csproj">

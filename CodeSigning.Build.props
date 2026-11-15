@@ -1,0 +1,17 @@
+<Project>
+
+	<PropertyGroup>
+		<EnableCodeSigning>true</EnableCodeSigning>
+		<ProvisionType>Automatic</ProvisionType>
+		<CreatePackage>false</CreatePackage>
+		<CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+		<CodesignKey>Apple Development: June Rhodes (MW3C85SFP5)</CodesignKey>
+		<UseHardenedRuntime>true</UseHardenedRuntime>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(AssemblyName)' == 'PassthroughAppEx'">
+		<CodesignRequireProvisioningProfile>true</CodesignRequireProvisioningProfile>
+		<CodesignProvision>Passthrough .NET FSKit Module</CodesignProvision>
+	</PropertyGroup>
+
+</Project>
