@@ -1,17 +1,26 @@
 ﻿#pragma warning disable APL0002
 
+using Darwin;
 using FSKit;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using CoreFoundation;
 
 namespace PassthroughAppEx
 {
     [Register("PassthroughFileSystem")]
     public class PassthroughFileSystem : FSUnaryFileSystem, IFSUnaryFileSystemOperations
     {
+        public CoreFoundation.OSLog PassthroughLog = new CoreFoundation.OSLog("games.redpoint.PassthroughDotNet", "default");
+
         private FSPathUrlResource? _loadedResource;
+
+        public PassthroughFileSystem()
+        {
+            PassthroughLog.Log("PassthroughFileSystem: init");
+        }
 
         public static string CreateVolumeNameFromPath(string path)
         {
@@ -19,8 +28,11 @@ namespace PassthroughAppEx
             return dirName + "_passthrough";
         }
 
-        void IFSUnaryFileSystemOperations.LoadResource(FSResource resource, FSTaskOptions options, FSUnaryFileSystemOperationsLoadResourceResult replyHandler)
+        [Export("loadResource:options:replyHandler:")]
+        public void LoadResource(FSResource resource, FSTaskOptions options, FSUnaryFileSystemOperationsLoadResourceResult replyHandler)
         {
+            PassthroughLog.Log("PassthroughFileSystem: LoadResource");
+
             if (!(resource is FSPathUrlResource urlResource))
             {
                 replyHandler(null, FSKitFunctions.GetErrorForPosixError((int)PosixError.EINVAL));
@@ -56,8 +68,11 @@ namespace PassthroughAppEx
             }
         }
 
-        void IFSUnaryFileSystemOperations.UnloadResource(FSResource resource, FSTaskOptions options, FSUnaryFileSystemOperationsUnloadResourceResult reply)
+        [Export("unloadResource:options:replyHandler:")]
+        public void UnloadResource(FSResource resource, FSTaskOptions options, FSUnaryFileSystemOperationsUnloadResourceResult reply)
         {
+            PassthroughLog.Log("PassthroughFileSystem: UnloadResource");
+
             if (!(resource is FSPathUrlResource urlResource))
             {
                 reply(FSKitFunctions.GetErrorForPosixError((int)PosixError.EINVAL));
@@ -81,8 +96,11 @@ namespace PassthroughAppEx
             return;
         }
 
-        void IFSUnaryFileSystemOperations.ProbeResource(FSResource resource, FSUnaryFileSystemOperationsProbeResourceResult replyHandler)
+        [Export("probeResource:replyHandler:")]
+        public void ProbeResource(FSResource resource, FSUnaryFileSystemOperationsProbeResourceResult replyHandler)
         {
+            PassthroughLog.Log("PassthroughFileSystem: ProbeResource");
+
             if (resource is FSPathUrlResource urlResource)
             {
                 var name = CreateVolumeNameFromPath(urlResource.Url.Path!);

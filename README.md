@@ -24,6 +24,9 @@ open -a $(pwd)/Passthrough/bin/Release/net10.0-macos/osx-arm64/Passthrough.app
 # Verify the FS extension is registered
 pluginkit -m -v | grep PassthroughDotNet
 
+# Restart fskitd if you've changed and rebuilt since last mount attempt
+sudo kill $(pidof fskitd)
+
 # Attempt to mount the filesystem (you will need to enable the extension in System Settings the first time)
 mkdir -p ./test/source
 mkdir -p ./test/target
