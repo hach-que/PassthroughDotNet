@@ -13,7 +13,7 @@ namespace PassthroughAppEx
     [Register("PassthroughFileSystem")]
     public class PassthroughFileSystem : FSUnaryFileSystem, IFSUnaryFileSystemOperations
     {
-        public CoreFoundation.OSLog PassthroughLog = new CoreFoundation.OSLog("games.redpoint.PassthroughDotNet", "default");
+        public static CoreFoundation.OSLog PassthroughLog = new CoreFoundation.OSLog("games.redpoint.PassthroughDotNet", "default");
 
         private FSPathUrlResource? _loadedResource;
 
